@@ -1,0 +1,44 @@
+# Welcome to Serverless!
+service: serverless
+	
+	
+disabledDeprecations:
+  - CODE_1 # To disable specific deprecation with code "CODE_1"
+  - '*' # To disable all deprecation messages
+  
+app: product-api
+
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: dev
+  region: us-east-1
+
+functions:
+  productAPI:
+    handler: Controller/product.handler
+    events:
+        - http:
+            path: /index
+            method: get
+           
+        - http:
+            path: /add
+            method: post
+        - http:
+            path: /in
+            method: post    
+        - http:
+            path: /lists
+            method: get
+        - http:
+            path: /{productId}
+            method: get
+          
+
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+   
